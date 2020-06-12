@@ -1,7 +1,7 @@
 name: refresh_loadmore
 description: A Flutter component that supports pull-down refresh and pull-up to load more data (一个组件，支持下拉刷新，上拉加载更多数据).
 version: 1.0.1
-author: shareven <1060776877@qq.com>
+
 homepage: https://github.com/shareven/refresh_loadmore
 
 environment:
