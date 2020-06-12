@@ -29,7 +29,9 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  bool isLastPage = false; /// is the last page | 是否为最后一页
+  bool isLastPage = false;
+
+  /// is the last page | 是否为最后一页
   List list;
   int page = 1;
 
@@ -94,14 +96,20 @@ class _MyHomePageState extends State<MyHomePage> {
               },
               noMoreText: 'No more data, you are at the end',
               isLastPage: isLastPage,
-              children: list
-                  .map(
-                    (e) => ListTile(
-                      title: Text(e),
-                      trailing: Icon(Icons.accessibility_new),
+              child: list.isNotEmpty
+                  ? Column(
+                      children: list
+                          .map(
+                            (e) => ListTile(
+                              title: Text(e),
+                              trailing: Icon(Icons.accessibility_new),
+                            ),
+                          )
+                          .toList(),
+                    )
+                  : Center(
+                      child: Text('empty'),
                     ),
-                  )
-                  .toList(),
             )
           : Center(child: CircularProgressIndicator()),
     );

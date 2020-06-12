@@ -13,8 +13,8 @@ class RefreshLoadmore extends StatefulWidget {
   /// Whether it is the last page, if it is true, you can not load more | 是否为最后一页，如果为true，则无法加载更多
   final bool isLastPage;
 
-  /// children widget | 子组件列表
-  final List<Widget> children;
+  /// child widget | 子组件
+  final Widget child;
 
   /// Prompt text when there is no more data at the bottom | 底部没有更多数据时的提示文字
   final String noMoreText;
@@ -24,7 +24,7 @@ class RefreshLoadmore extends StatefulWidget {
 
   const RefreshLoadmore({
     Key key,
-    @required this.children,
+    @required this.child,
     @required this.isLastPage,
     this.noMoreText,
     this.noMoreTextStyle,
@@ -76,49 +76,46 @@ class _RefreshLoadmoreState extends State<RefreshLoadmore> {
 
   @override
   Widget build(BuildContext context) {
+    Widget mainWiget = ListView(
+      /// Solve the problem that there are too few items to pull down and refresh | 解决item太少，无法下拉刷新的问题
+      physics: AlwaysScrollableScrollPhysics(),
+      controller: _scrollController,
+      children: <Widget>[
+        widget.child,
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Padding(
+              padding: EdgeInsets.all(16),
+              child: _isLoading
+                  ? CupertinoActivityIndicator()
+                  : Text(
+                      widget.isLastPage
+                          ? widget.noMoreText ?? 'No more data'
+                          : '',
+                      style: widget.noMoreTextStyle ??
+                          TextStyle(
+                            fontSize: 18,
+                            color: Theme.of(context).disabledColor,
+                          ),
+                    ),
+            )
+          ],
+        )
+      ],
+    );
+
     if (widget.onRefresh == null) {
-      return Scrollbar(
-        child: ListView(
-          controller: _scrollController,
-          children: widget.children,
-        ),
-      );
+      return Scrollbar(child: mainWiget);
     }
+
     return RefreshIndicator(
       key: _refreshIndicatorKey,
       onRefresh: () async {
         if (_isLoading) return;
         await widget.onRefresh();
       },
-      child: ListView(
-        physics: AlwaysScrollableScrollPhysics(),
-
-        /// Solve the problem that there are too few items to pull down and refresh | 解决item太少，无法下拉刷新的问题
-        controller: _scrollController,
-        children: <Widget>[
-          Column(children: widget.children),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              Padding(
-                padding: EdgeInsets.all(16),
-                child: _isLoading
-                    ? CupertinoActivityIndicator()
-                    : Text(
-                        widget.isLastPage
-                            ? widget.noMoreText ?? 'No more data'
-                            : '',
-                        style: widget.noMoreTextStyle ??
-                            TextStyle(
-                              fontSize: 18,
-                              color: Theme.of(context).disabledColor,
-                            ),
-                      ),
-              )
-            ],
-          )
-        ],
-      ),
+      child: mainWiget,
     );
   }
 }

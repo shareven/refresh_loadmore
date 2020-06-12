@@ -8,7 +8,7 @@ Add this line to pubspec.yaml ( 添加这一行到pubspec.yaml)
 
 ``` 
 dependencies:
-     refresh_loadmore: ^1.0.3
+     refresh_loadmore: ^1.1.0
 ```
 
 ## How To Use
@@ -26,8 +26,8 @@ final Future<void> Function() onLoadmore;
 /// Whether it is the last page, if it is true, you can not load more | 是否为最后一页，如果为true，则无法加载更多
 final bool isLastPage;
 
-/// children widget | 子组件列表
-final List<Widget> children;
+/// child widget | 子组件
+final Widget child;
 
 /// Prompt text when there is no more data at the bottom | 底部没有更多数据时的提示文字
 final String noMoreText;
@@ -70,7 +70,9 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  bool isLastPage = false; /// is the last page | 是否为最后一页
+  bool isLastPage = false;
+
+  /// is the last page | 是否为最后一页
   List list;
   int page = 1;
 
@@ -135,19 +137,26 @@ class _MyHomePageState extends State<MyHomePage> {
               },
               noMoreText: 'No more data, you are at the end',
               isLastPage: isLastPage,
-              children: list
-                  .map(
-                    (e) => ListTile(
-                      title: Text(e),
-                      trailing: Icon(Icons.accessibility_new),
+              child: list.isNotEmpty
+                  ? Column(
+                      children: list
+                          .map(
+                            (e) => ListTile(
+                              title: Text(e),
+                              trailing: Icon(Icons.accessibility_new),
+                            ),
+                          )
+                          .toList(),
+                    )
+                  : Center(
+                      child: Text('empty'),
                     ),
-                  )
-                  .toList(),
             )
           : Center(child: CircularProgressIndicator()),
     );
   }
 }
+
 ```
 
 ## Renderings

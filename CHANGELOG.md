@@ -9,3 +9,7 @@
 ## [1.0.3] 
 
 * add description about the class's arguments
+
+## [1.1.0] 
+
+* change children to child
