@@ -29,7 +29,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  bool isLastPage = false; //is the last page | 是否为最后一页
+  bool isLastPage = false; /// is the last page | 是否为最后一页
   List list;
   int page = 1;
 
