@@ -4,11 +4,22 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class RefreshLoadmore extends StatefulWidget {
+  /// callback function on pull down to refresh | 下拉刷新时的回调函数
   final Future<void> Function() onRefresh;
+
+  /// callback function on pull up to load more data | 上拉以加载更多数据的回调函数
   final Future<void> Function() onLoadmore;
+
+  /// Whether it is the last page, if it is true, you can not load more | 是否为最后一页，如果为true，则无法加载更多
   final bool isLastPage;
+
+  /// children widget | 子组件列表
   final List<Widget> children;
+
+  /// Prompt text when there is no more data at the bottom | 底部没有更多数据时的提示文字
   final String noMoreText;
+
+  /// [noMoreText] text style | [noMoreText]的文字样式
   final TextStyle noMoreTextStyle;
 
   const RefreshLoadmore({

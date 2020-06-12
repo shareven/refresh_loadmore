@@ -1,8 +1,12 @@
 name: refresh_loadmore
 description: A Flutter component that supports pull-down refresh and pull-up to load more data 
-version: 1.0.2
+version: 1.0.3
 
 homepage: https://github.com/shareven/refresh_loadmore
+
+# check
+# flutter pub pub publish --dry-run
+# flutter packages pub publish --server=https://pub.dartlang.org
 
 environment:
   sdk: ">=2.7.0 <3.0.0"

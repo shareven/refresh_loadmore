@@ -5,3 +5,7 @@
 ## [1.0.2] 
 
 * remove Chinese description
+
+## [1.0.3] 
+
+* add description about the class's arguments
