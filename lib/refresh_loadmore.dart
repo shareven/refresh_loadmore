@@ -53,17 +53,21 @@ class _RefreshLoadmoreState extends State<RefreshLoadmore> {
           return;
         }
 
-        setState(() {
-          _isLoading = true;
-        });
+        if (mounted) {
+          setState(() {
+            _isLoading = true;
+          });
+        }
 
         if (widget.onLoadmore != null) {
           await widget.onLoadmore();
         }
 
-        setState(() {
-          _isLoading = false;
-        });
+        if (mounted) {
+          setState(() {
+            _isLoading = false;
+          });
+        }
       }
     });
   }

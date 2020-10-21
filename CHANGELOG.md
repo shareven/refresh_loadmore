@@ -13,3 +13,7 @@
 ## [1.1.0] 
 
 * change children to child
+
+## [1.1.1] 
+
+* add mounted judgement
