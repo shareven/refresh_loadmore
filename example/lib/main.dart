@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
 }
 
 class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
+  MyHomePage({Key? key, required this.title}) : super(key: key);
 
   final String title;
 
@@ -32,7 +32,7 @@ class _MyHomePageState extends State<MyHomePage> {
   bool isLastPage = false;
 
   /// is the last page | 是否为最后一页
-  List list;
+  List? list;
   int page = 1;
 
   @override
@@ -83,7 +83,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
                 await Future.delayed(Duration(seconds: 1), () {
                   setState(() {
-                    list.addAll(['123', '234', '457']);
+                    list!.addAll(['123', '234', '457']);
                     page++;
                   });
                   print(page);
@@ -96,10 +96,10 @@ class _MyHomePageState extends State<MyHomePage> {
               },
               noMoreText: 'No more data, you are at the end',
               isLastPage: isLastPage,
-              child: list.isNotEmpty
+              child: list!.isNotEmpty
                   ? Column(
                       children: list
-                          .map(
+                          !.map(
                             (e) => ListTile(
                               title: Text(e),
                               trailing: Icon(Icons.accessibility_new),

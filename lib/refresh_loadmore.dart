@@ -5,10 +5,10 @@ import 'package:flutter/material.dart';
 
 class RefreshLoadmore extends StatefulWidget {
   /// callback function on pull down to refresh | 下拉刷新时的回调函数
-  final Future<void> Function() onRefresh;
+  final Future<void> Function()? onRefresh;
 
   /// callback function on pull up to load more data | 上拉以加载更多数据的回调函数
-  final Future<void> Function() onLoadmore;
+  final Future<void> Function()? onLoadmore;
 
   /// Whether it is the last page, if it is true, you can not load more | 是否为最后一页，如果为true，则无法加载更多
   final bool isLastPage;
@@ -17,15 +17,15 @@ class RefreshLoadmore extends StatefulWidget {
   final Widget child;
 
   /// Prompt text when there is no more data at the bottom | 底部没有更多数据时的提示文字
-  final String noMoreText;
+  final String? noMoreText;
 
   /// [noMoreText] text style | [noMoreText]的文字样式
-  final TextStyle noMoreTextStyle;
+  final TextStyle? noMoreTextStyle;
 
   const RefreshLoadmore({
-    Key key,
-    @required this.child,
-    @required this.isLastPage,
+    Key? key,
+    required this.child,
+    required this.isLastPage,
     this.noMoreText,
     this.noMoreTextStyle,
     this.onRefresh,
@@ -39,16 +39,16 @@ class _RefreshLoadmoreState extends State<RefreshLoadmore> {
   final GlobalKey<RefreshIndicatorState> _refreshIndicatorKey =
       GlobalKey<RefreshIndicatorState>();
 
-  ScrollController _scrollController;
+  ScrollController? _scrollController;
   bool _isLoading = false;
 
   @override
   void initState() {
     super.initState();
     _scrollController = ScrollController();
-    _scrollController.addListener(() async {
-      if (_scrollController.position.pixels >=
-          _scrollController.position.maxScrollExtent) {
+    _scrollController!.addListener(() async {
+      if (_scrollController!.position.pixels >=
+          _scrollController!.position.maxScrollExtent) {
         if (_isLoading) {
           return;
         }
@@ -60,7 +60,7 @@ class _RefreshLoadmoreState extends State<RefreshLoadmore> {
         }
 
         if (widget.onLoadmore != null) {
-          await widget.onLoadmore();
+          await widget.onLoadmore!();
         }
 
         if (mounted) {
@@ -74,7 +74,7 @@ class _RefreshLoadmoreState extends State<RefreshLoadmore> {
 
   @override
   void dispose() {
-    _scrollController.dispose();
+    _scrollController!.dispose();
     super.dispose();
   }
 
@@ -117,7 +117,7 @@ class _RefreshLoadmoreState extends State<RefreshLoadmore> {
       key: _refreshIndicatorKey,
       onRefresh: () async {
         if (_isLoading) return;
-        await widget.onRefresh();
+        await widget.onRefresh!();
       },
       child: mainWiget,
     );

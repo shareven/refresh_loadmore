@@ -8,7 +8,7 @@ Add this line to pubspec.yaml ( 添加这一行到pubspec.yaml)
 
 ``` 
 dependencies:
-     refresh_loadmore: ^1.1.0
+     refresh_loadmore: ^2.0.1
 ```
 
 ## How To Use
@@ -17,23 +17,23 @@ Use the class `RefreshLoadmore`
 
 Properties and functions:
 ``` dart
-/// callback function on pull down to refresh | 下拉刷新时的回调函数
-final Future<void> Function() onRefresh;
+  /// callback function on pull down to refresh | 下拉刷新时的回调函数
+  final Future<void> Function()? onRefresh;
 
-/// callback function on pull up to load more data | 上拉以加载更多数据的回调函数
-final Future<void> Function() onLoadmore;
+  /// callback function on pull up to load more data | 上拉以加载更多数据的回调函数
+  final Future<void> Function()? onLoadmore;
 
-/// Whether it is the last page, if it is true, you can not load more | 是否为最后一页，如果为true，则无法加载更多
-final bool isLastPage;
+  /// Whether it is the last page, if it is true, you can not load more | 是否为最后一页，如果为true，则无法加载更多
+  final bool isLastPage;
 
-/// child widget | 子组件
-final Widget child;
+  /// child widget | 子组件
+  final Widget child;
 
-/// Prompt text when there is no more data at the bottom | 底部没有更多数据时的提示文字
-final String noMoreText;
+  /// Prompt text when there is no more data at the bottom | 底部没有更多数据时的提示文字
+  final String? noMoreText;
 
-/// [noMoreText] text style | [noMoreText]的文字样式
-final TextStyle noMoreTextStyle;
+  /// [noMoreText] text style | [noMoreText]的文字样式
+  final TextStyle? noMoreTextStyle;
 ```
 
 ## Examples
@@ -61,7 +61,7 @@ class MyApp extends StatelessWidget {
 }
 
 class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
+  MyHomePage({Key? key, required this.title}) : super(key: key);
 
   final String title;
 
@@ -73,7 +73,7 @@ class _MyHomePageState extends State<MyHomePage> {
   bool isLastPage = false;
 
   /// is the last page | 是否为最后一页
-  List list;
+  List? list;
   int page = 1;
 
   @override
@@ -124,7 +124,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
                 await Future.delayed(Duration(seconds: 1), () {
                   setState(() {
-                    list.addAll(['123', '234', '457']);
+                    list!.addAll(['123', '234', '457']);
                     page++;
                   });
                   print(page);
@@ -137,10 +137,10 @@ class _MyHomePageState extends State<MyHomePage> {
               },
               noMoreText: 'No more data, you are at the end',
               isLastPage: isLastPage,
-              child: list.isNotEmpty
+              child: list!.isNotEmpty
                   ? Column(
                       children: list
-                          .map(
+                          !.map(
                             (e) => ListTile(
                               title: Text(e),
                               trailing: Icon(Icons.accessibility_new),
@@ -156,6 +156,7 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 }
+
 
 ```
 
