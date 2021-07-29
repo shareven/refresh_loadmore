@@ -59,7 +59,7 @@ class _RefreshLoadmoreState extends State<RefreshLoadmore> {
           });
         }
 
-        if (widget.onLoadmore != null) {
+        if (!widget.isLastPage && widget.onLoadmore != null) {
           await widget.onLoadmore!();
         }
 

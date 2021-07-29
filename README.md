@@ -8,7 +8,7 @@ Add this line to pubspec.yaml ( 添加这一行到pubspec.yaml)
 
 ``` 
 dependencies:
-     refresh_loadmore: ^2.0.1
+     refresh_loadmore: ^2.0.2
 ```
 
 ## How To Use
@@ -120,8 +120,6 @@ class _MyHomePageState extends State<MyHomePage> {
           ? RefreshLoadmore(
               onRefresh: loadFirstData,
               onLoadmore: () async {
-                if (isLastPage) return;
-
                 await Future.delayed(Duration(seconds: 1), () {
                   setState(() {
                     list!.addAll(['123', '234', '457']);

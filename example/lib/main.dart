@@ -79,8 +79,6 @@ class _MyHomePageState extends State<MyHomePage> {
           ? RefreshLoadmore(
               onRefresh: loadFirstData,
               onLoadmore: () async {
-                if (isLastPage) return;
-
                 await Future.delayed(Duration(seconds: 1), () {
                   setState(() {
                     list!.addAll(['123', '234', '457']);
