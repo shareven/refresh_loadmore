@@ -8,7 +8,7 @@ Add this line to pubspec.yaml ( 添加这一行到pubspec.yaml)
 
 ``` 
 dependencies:
-     refresh_loadmore: ^2.0.2
+     refresh_loadmore: ^2.0.3
 ```
 
 ## How To Use
@@ -70,9 +70,10 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  
+  /// is the last page | 是否为最后一页
   bool isLastPage = false;
 
-  /// is the last page | 是否为最后一页
   List? list;
   int page = 1;
 

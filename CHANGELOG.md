@@ -1,3 +1,7 @@
+## [2.0.3] 
+
+* Fixed the example
+
 ## [2.0.2] 
 
 * Add the judgement of `isLastPage` before `onLoadmore`
