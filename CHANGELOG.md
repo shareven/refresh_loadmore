@@ -1,3 +1,7 @@
+## [2.0.4] 
+
+* Change `noMoreText` to `noMoreWidget`
+
 ## [2.0.3] 
 
 * Fixed the example

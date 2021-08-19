@@ -4,32 +4,28 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class RefreshLoadmore extends StatefulWidget {
-  /// callback function on pull down to refresh | 下拉刷新时的回调函数
+  /// Callback function on pull down to refresh | 下拉刷新时的回调函数
   final Future<void> Function()? onRefresh;
 
-  /// callback function on pull up to load more data | 上拉以加载更多数据的回调函数
+  /// Callback function on pull up to load more data | 上拉以加载更多数据的回调函数
   final Future<void> Function()? onLoadmore;
 
   /// Whether it is the last page, if it is true, you can not load more | 是否为最后一页，如果为true，则无法加载更多
   final bool isLastPage;
 
-  /// child widget | 子组件
+  /// Child widget | 子组件
   final Widget child;
 
-  /// Prompt text when there is no more data at the bottom | 底部没有更多数据时的提示文字
-  final String? noMoreText;
-
-  /// [noMoreText] text style | [noMoreText]的文字样式
-  final TextStyle? noMoreTextStyle;
+  /// Prompt text widget when there is no more data at the bottom | 底部没有更多数据时的提示文字组件
+  final Widget? noMoreWidget;
 
   const RefreshLoadmore({
     Key? key,
     required this.child,
     required this.isLastPage,
-    this.noMoreText,
-    this.noMoreTextStyle,
     this.onRefresh,
     this.onLoadmore,
+    this.noMoreWidget,
   }) : super(key: key);
   @override
   _RefreshLoadmoreState createState() => _RefreshLoadmoreState();
@@ -93,17 +89,17 @@ class _RefreshLoadmoreState extends State<RefreshLoadmore> {
               padding: EdgeInsets.all(16),
               child: _isLoading
                   ? CupertinoActivityIndicator()
-                  : Text(
-                      widget.isLastPage
-                          ? widget.noMoreText ?? 'No more data'
-                          : '',
-                      style: widget.noMoreTextStyle ??
-                          TextStyle(
-                            fontSize: 18,
-                            color: Theme.of(context).disabledColor,
-                          ),
-                    ),
-            )
+                  : widget.isLastPage
+                      ? widget.noMoreWidget ??
+                          Text(
+                            'No more data',
+                            style: TextStyle(
+                              fontSize: 18,
+                              color: Theme.of(context).disabledColor,
+                            ),
+                          )
+                      : Container(),
+            ),
           ],
         )
       ],

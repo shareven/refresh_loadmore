@@ -8,7 +8,7 @@ Add this line to pubspec.yaml ( 添加这一行到pubspec.yaml)
 
 ``` 
 dependencies:
-     refresh_loadmore: ^2.0.3
+     refresh_loadmore: ^2.0.4
 ```
 
 ## How To Use
@@ -17,23 +17,21 @@ Use the class `RefreshLoadmore`
 
 Properties and functions:
 ``` dart
-  /// callback function on pull down to refresh | 下拉刷新时的回调函数
+  /// Callback function on pull down to refresh | 下拉刷新时的回调函数
   final Future<void> Function()? onRefresh;
 
-  /// callback function on pull up to load more data | 上拉以加载更多数据的回调函数
+  /// Callback function on pull up to load more data | 上拉以加载更多数据的回调函数
   final Future<void> Function()? onLoadmore;
 
   /// Whether it is the last page, if it is true, you can not load more | 是否为最后一页，如果为true，则无法加载更多
   final bool isLastPage;
 
-  /// child widget | 子组件
+  /// Child widget | 子组件
   final Widget child;
 
-  /// Prompt text when there is no more data at the bottom | 底部没有更多数据时的提示文字
-  final String? noMoreText;
+  /// Prompt text widget when there is no more data at the bottom | 底部没有更多数据时的提示文字组件
+  final Widget? noMoreWidget;
 
-  /// [noMoreText] text style | [noMoreText]的文字样式
-  final TextStyle? noMoreTextStyle;
 ```
 
 ## Examples
@@ -70,7 +68,6 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  
   /// is the last page | 是否为最后一页
   bool isLastPage = false;
 
@@ -99,7 +96,7 @@ class _MyHomePageState extends State<MyHomePage> {
           'sdfasfa',
           'sdfgaf',
           'adsgafg'
-          'adsgafg',
+              'adsgafg',
           'dddd',
           'sdfasfa',
           'sdfgaf',
@@ -134,12 +131,18 @@ class _MyHomePageState extends State<MyHomePage> {
                   }
                 });
               },
-              noMoreText: 'No more data, you are at the end',
+              noMoreWidget: Text(
+                'No more data, you are at the end',
+                style: TextStyle(
+                  fontSize: 18,
+                  color: Theme.of(context).disabledColor,
+                ),
+              ),
               isLastPage: isLastPage,
               child: list!.isNotEmpty
                   ? Column(
-                      children: list
-                          !.map(
+                      children: list!
+                          .map(
                             (e) => ListTile(
                               title: Text(e),
                               trailing: Icon(Icons.accessibility_new),
@@ -155,6 +158,7 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 }
+
 
 
 ```

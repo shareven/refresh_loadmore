@@ -29,7 +29,6 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  
   /// is the last page | 是否为最后一页
   bool isLastPage = false;
 
@@ -58,7 +57,7 @@ class _MyHomePageState extends State<MyHomePage> {
           'sdfasfa',
           'sdfgaf',
           'adsgafg'
-          'adsgafg',
+              'adsgafg',
           'dddd',
           'sdfasfa',
           'sdfgaf',
@@ -93,12 +92,18 @@ class _MyHomePageState extends State<MyHomePage> {
                   }
                 });
               },
-              noMoreText: 'No more data, you are at the end',
+              noMoreWidget: Text(
+                'No more data, you are at the end',
+                style: TextStyle(
+                  fontSize: 18,
+                  color: Theme.of(context).disabledColor,
+                ),
+              ),
               isLastPage: isLastPage,
               child: list!.isNotEmpty
                   ? Column(
-                      children: list
-                          !.map(
+                      children: list!
+                          .map(
                             (e) => ListTile(
                               title: Text(e),
                               trailing: Icon(Icons.accessibility_new),
