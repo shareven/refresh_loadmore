@@ -19,6 +19,9 @@ class RefreshLoadmore extends StatefulWidget {
   /// Prompt text widget when there is no more data at the bottom | 底部没有更多数据时的提示文字组件
   final Widget? noMoreWidget;
 
+  /// You can use your custom scrollController, or not | 你可以使用自定义的 ScrollController，或者不使用
+  final ScrollController? scrollController;
+
   const RefreshLoadmore({
     Key? key,
     required this.child,
@@ -26,6 +29,7 @@ class RefreshLoadmore extends StatefulWidget {
     this.onRefresh,
     this.onLoadmore,
     this.noMoreWidget,
+    this.scrollController,
   }) : super(key: key);
   @override
   _RefreshLoadmoreState createState() => _RefreshLoadmoreState();
@@ -41,7 +45,7 @@ class _RefreshLoadmoreState extends State<RefreshLoadmore> {
   @override
   void initState() {
     super.initState();
-    _scrollController = ScrollController();
+    _scrollController = widget.scrollController ?? ScrollController();
     _scrollController!.addListener(() async {
       if (_scrollController!.position.pixels >=
           _scrollController!.position.maxScrollExtent) {
@@ -70,7 +74,7 @@ class _RefreshLoadmoreState extends State<RefreshLoadmore> {
 
   @override
   void dispose() {
-    _scrollController!.dispose();
+    if (widget.scrollController == null) _scrollController!.dispose();
     super.dispose();
   }
 

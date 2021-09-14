@@ -8,7 +8,7 @@ Add this line to pubspec.yaml ( 添加这一行到pubspec.yaml)
 
 ``` 
 dependencies:
-     refresh_loadmore: ^2.0.4
+     refresh_loadmore: ^2.0.5
 ```
 
 ## How To Use
@@ -31,6 +31,9 @@ Properties and functions:
 
   /// Prompt text widget when there is no more data at the bottom | 底部没有更多数据时的提示文字组件
   final Widget? noMoreWidget;
+
+  /// You can use your custom scrollController, or not | 你可以使用自定义的 ScrollController，或者不使用
+  final ScrollController? scrollController;
 
 ```
 

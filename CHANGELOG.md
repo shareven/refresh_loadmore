@@ -1,3 +1,7 @@
+## [2.0.5] 
+
+* Add a scrollController. You can use your custom scrollController, or not 
+
 ## [2.0.4] 
 
 * Change `noMoreText` to `noMoreWidget`
