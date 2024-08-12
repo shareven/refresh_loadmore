@@ -19,10 +19,10 @@ class RefreshLoadmore extends StatefulWidget {
   /// Prompt text widget when there is no more data at the bottom | 底部没有更多数据时的提示文字组件
   final Widget? noMoreWidget;
 
-  /// Prompt widget when loading new data at the bottom
+  /// Prompt widget when loading new data at the bottom | 正在加载数据时的提示组件
   final Widget? loadingWidget;
 
-  /// Prompt padding for body if needed
+  /// Prompt padding for body if needed | 你可以自定义padding
   final EdgeInsetsGeometry? padding;
 
   /// You can use your custom scrollController, or not | 你可以使用自定义的 ScrollController，或者不使用
@@ -91,7 +91,7 @@ class _RefreshLoadmoreState extends State<RefreshLoadmore> {
     Widget mainWiget = ListView(
       /// Solve the problem that there are too few items to pull down and refresh | 解决item太少，无法下拉刷新的问题
       physics: AlwaysScrollableScrollPhysics(),
-      padding: padding,
+      padding: widget.padding,
       controller: _scrollController,
       children: <Widget>[
         widget.child,

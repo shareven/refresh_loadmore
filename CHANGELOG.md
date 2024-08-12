@@ -1,3 +1,11 @@
+## [2.0.7] 
+
+*  Change README
+
+## [2.0.6] 
+
+* Add a paddiing and a loadingWidget. You can custom padding, or loadingWidget 
+
 ## [2.0.5] 
 
 * Add a scrollController. You can use your custom scrollController, or not 
